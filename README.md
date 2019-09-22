@@ -19,7 +19,5 @@ JDK 1.3, so it should compile and run there as well.
 * The game makes use of what are now deprecated APIs.
 * Movement is VERY inefficient. At the time I didn't know how to show a portion
   of an image without reloading the whole thing.
-* On my computer the bottom of all the windows is being cut off. Something must
-  have changed in the last 16 years about how height is calculated.
 * High score file is UTF-16 with no BOM, and written to wherever you run the
   game from.

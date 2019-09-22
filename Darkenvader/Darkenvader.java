@@ -18,6 +18,8 @@ public class Darkenvader
     public static void main(String[] args)
     {
         JFrame c = new Console();
+        c.pack();
+        c.setResizable(false);
         c.setVisible(true);
     }
 }
@@ -40,14 +42,12 @@ class Console extends JFrame implements ComponentListener
     {
         // Setup Frame
         setTitle("Darkenvader");
-        setSize(640,480);
         setLocation(1,1);
-        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
         //For swing containers to hold components
         cp = getContentPane();
+        cp.setPreferredSize(new Dimension(640,480));
 
         // Load Panels
         splash = new SplashPanel();
