@@ -201,7 +201,7 @@ class SplashPanel extends JPanel implements KeyListener
         requestFocus();
     }
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -295,7 +295,7 @@ class StoryPanel extends JPanel implements KeyListener
     }
 
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -360,7 +360,7 @@ class InstructionPanel extends JPanel implements KeyListener
     }
 
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -422,7 +422,7 @@ class CreditPanel extends JPanel implements KeyListener
     }
 
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -462,7 +462,7 @@ class SetupPanel extends JPanel implements KeyListener
         repaint();
     }
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -582,7 +582,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener
         startGame();
     }
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -879,7 +879,7 @@ class BattlePanel extends JPanel implements KeyListener
 
     }
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -1064,7 +1064,7 @@ class GameOverPanel extends JPanel implements KeyListener
     }
 
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -1199,7 +1199,7 @@ class VictoryPanel extends JPanel implements KeyListener
         }
     }
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
@@ -1240,7 +1240,7 @@ class HighScorePanel extends JPanel implements KeyListener
         repaint();
     }
 
-    public boolean isFocusTraversable()
+    public boolean isFocusable()
     {
         return true;
     }
