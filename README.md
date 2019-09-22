@@ -14,7 +14,7 @@ Darkenvader can then be run with:
 `java Darkenvader.Darkenvader`
 
 I have tested Darkenvader on JDK 8 and Open JDK 12. Some recent modifications
-require a newer Java version than the original 1.3.
+require a newer Java 8 or newer.
 
 # Known issues
 * Movement is VERY inefficient. At the time I didn't know how to show a portion

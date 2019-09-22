@@ -4,7 +4,6 @@ package Darkenvader;
 // An adventure
 // by Stephen E. Baker
 
-// Libraries
 import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.*;
@@ -17,14 +16,16 @@ public class Darkenvader
 {
     public static void main(String[] args)
     {
-        JFrame c = new Console();
-        c.pack();
-        c.setResizable(false);
-        c.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            JFrame c = new Console();
+            c.pack();
+            c.setResizable(false);
+            c.setVisible(true);
+        });
     }
 }
 
-// Main window in which program runs
+// Main window
 class Console extends JFrame implements ComponentListener
 {
     Container cp;
@@ -40,16 +41,13 @@ class Console extends JFrame implements ComponentListener
 
     public Console()
     {
-        // Setup Frame
         setTitle("Darkenvader");
         setLocation(1,1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //For swing containers to hold components
         cp = getContentPane();
         cp.setPreferredSize(new Dimension(640,480));
 
-        // Load Panels
         splash = new SplashPanel();
         game = new GamePanel();
         instruc = new InstructionPanel();
@@ -59,12 +57,10 @@ class Console extends JFrame implements ComponentListener
         gameOver = new GameOverPanel();
         victory = new VictoryPanel();
         highScore = new HighScorePanel();
-        // Run the first Panel
+
         cp.add(splash);
         splash.setVisible(true);
 
-        //Component Listeners detect panel activity and
-        //allows me to switch panels.
         splash.addComponentListener(this);
         story.addComponentListener(this);
         game.addComponentListener(this);
@@ -76,7 +72,6 @@ class Console extends JFrame implements ComponentListener
         highScore.addComponentListener(this);
     }
 
-    // panel.setVisible(false); calls this.
     public void componentHidden(ComponentEvent event)
     {
         cp.removeAll();
@@ -153,7 +148,6 @@ class Console extends JFrame implements ComponentListener
         }
     }
 
-    // Rest of ComponentListener methods.
     public void componentMoved(ComponentEvent event)
     {
     }
@@ -542,7 +536,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener
         this.setLayout(null);
         insets = this.getInsets();
 
-        // Loads GIF's
         try
         {
             worldMap = toolkit.getImage(getClass().getResource("WorldMap.gif"));
