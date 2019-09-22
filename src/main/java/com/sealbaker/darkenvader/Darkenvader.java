@@ -1,4 +1,4 @@
-package Darkenvader;
+package com.sealbaker.darkenvader;
 
 // Darkenvader
 // An adventure
