@@ -2,17 +2,17 @@ Darkenvader is a game I wrote in highschool in 2003. The initial commit
 is that version, with the addition of this README.md, the LICENSE.md, and
 git files.
 
-Darkenvader was written for Java 1.3, using the AWT toolset.
+Darkenvader was written for Java 1.3.
 
 # Running
 
-Darkenvader can be compiled with the 1.8.x JDK from the root of this repo with:
+Darkenvader can be compiled with the Java JDK 12 from the root of this repo with:
 `javac ./Darkenvader/Darkenvader.java`
 
 Darkenvader can then be run with:
 `java Darkenvader.Darkenvader`
 
-I have not tested with any newer JDK version. It was originally written for
+I have tested Darkenvader on JDK 8 and Open JDK 12. It was originally written for
 JDK 1.3, so it should compile and run there as well.
 
 # Known issues
