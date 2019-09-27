@@ -1,12 +1,10 @@
 package com.sealbaker.darkenvader;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ComponentListener;
+import java.awt.event.ComponentEvent;
+import javax.swing.JFrame;
 
 // Main window
 class Console extends JFrame implements ComponentListener
@@ -134,9 +132,11 @@ class Console extends JFrame implements ComponentListener
     public void componentMoved(ComponentEvent event)
     {
     }
+
     public void componentResized(ComponentEvent event)
     {
     }
+
     public void componentShown(ComponentEvent event)
     {
     }

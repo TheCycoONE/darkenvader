@@ -1,12 +1,12 @@
 package com.sealbaker.darkenvader;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JPanel;
 
 class StoryPanel extends JPanel implements KeyListener
 {
@@ -60,11 +60,11 @@ class StoryPanel extends JPanel implements KeyListener
         setVisible(false);
     }
 
-    public void keyPressed(java.awt.event.KeyEvent keyEvent)
+    public void keyPressed(KeyEvent keyEvent)
     {
     }
 
-    public void keyReleased(java.awt.event.KeyEvent keyEvent)
+    public void keyReleased(KeyEvent keyEvent)
     {
     }
 }

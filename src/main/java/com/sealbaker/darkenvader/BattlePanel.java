@@ -1,12 +1,14 @@
 package com.sealbaker.darkenvader;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 class BattlePanel extends JPanel implements KeyListener
 {
@@ -76,10 +78,12 @@ class BattlePanel extends JPanel implements KeyListener
             this.setVisible(false);
         }
     }
-    public void keyPressed(java.awt.event.KeyEvent keyEvent)
+
+    public void keyPressed(KeyEvent keyEvent)
     {
     }
-    public void keyReleased(java.awt.event.KeyEvent keyEvent)
+
+    public void keyReleased(KeyEvent keyEvent)
     {
     }
 }

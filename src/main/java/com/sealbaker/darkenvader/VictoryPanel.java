@@ -1,12 +1,21 @@
 package com.sealbaker.darkenvader;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 class VictoryPanel extends JPanel implements KeyListener
 {
@@ -19,6 +28,7 @@ class VictoryPanel extends JPanel implements KeyListener
     {
         setBackground(Color.black);
     }
+
     public void initVictory()
     {
         removeAll();
@@ -150,7 +160,7 @@ class VictoryPanel extends JPanel implements KeyListener
         }
     }
 
-    public void keyReleased(java.awt.event.KeyEvent keyEvent)
+    public void keyReleased(KeyEvent keyEvent)
     {
     }
 }

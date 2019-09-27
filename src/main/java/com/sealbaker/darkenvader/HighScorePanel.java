@@ -1,12 +1,17 @@
 package com.sealbaker.darkenvader;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javax.swing.JPanel;
 
 class HighScorePanel extends JPanel implements KeyListener
 {
@@ -69,11 +74,11 @@ class HighScorePanel extends JPanel implements KeyListener
         setVisible(false);
     }
 
-    public void keyPressed(java.awt.event.KeyEvent keyEvent)
+    public void keyPressed(KeyEvent keyEvent)
     {
     }
 
-    public void keyReleased(java.awt.event.KeyEvent keyEvent)
+    public void keyReleased(KeyEvent keyEvent)
     {
     }
 }
