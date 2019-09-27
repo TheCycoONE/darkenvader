@@ -3,6 +3,12 @@
 .nbattrs
 *~
 
+# Eclipse
+/bin/
+.classpath
+.project
+/.settings/
+
 # Gradle
 .gradle
 /build/
