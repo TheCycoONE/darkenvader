@@ -21,7 +21,10 @@ class HighScoreTable {
         List<HighScore> highScores = new ArrayList<HighScore>();
         try
         {
-            File highScoreFile = openOrCreateHighScoreFile();
+            File highScoreFile = getHighScoreFile();
+            if (!highScoreFile.exists()) {
+                return getDefaultHighScores();
+            }
 
             try (DataInputStream in = new DataInputStream(new FileInputStream(highScoreFile)))
             {
@@ -41,6 +44,7 @@ class HighScoreTable {
         }
         catch(IOException e)
         {
+            highScores = getDefaultHighScores();
         }
 
         return highScores;
@@ -70,7 +74,7 @@ class HighScoreTable {
     {
         try
         {
-            File highScoreFile = openOrCreateHighScoreFile();
+            File highScoreFile = getHighScoreFile();
 
             try (DataOutputStream out = new DataOutputStream(
                         new FileOutputStream(highScoreFile)))
@@ -88,22 +92,19 @@ class HighScoreTable {
         }
     }
 
-    private File openOrCreateHighScoreFile() throws IOException
+    private File getHighScoreFile() throws IOException
     {
         File highScoreFile = new File("highscores.txt");
-        if (!highScoreFile.exists())
-        {
-            try (DataOutputStream out = new DataOutputStream(
-                        new FileOutputStream(highScoreFile))) {
-                for (int i = 0; i < MAX_HIGH_SCORES; i++)
-                {
-                    out.writeChars("no one");
-                    out.writeChar('\t');
-                    out.writeInt(0);
-                }
-            }
-        }
-
         return highScoreFile;
+    }
+
+    private List<HighScore> getDefaultHighScores()
+    {
+        List<HighScore> scores = new ArrayList<HighScore>();
+        for (int i = 0; i < MAX_HIGH_SCORES; i++)
+        {
+            scores.add(new HighScore("no one", 0));
+        }
+        return scores;
     }
 }
