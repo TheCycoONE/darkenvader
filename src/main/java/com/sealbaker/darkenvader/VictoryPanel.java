@@ -5,12 +5,6 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,13 +13,15 @@ import javax.swing.JTextField;
 
 class VictoryPanel extends JPanel implements KeyListener
 {
-    ImageIcon victoryScrn;
-    String playerName;
-    JTextField plrname;
-    boolean doneVictory;
+    private ImageIcon victoryScrn;
+    private String playerName;
+    private JTextField plrname;
+    private boolean doneVictory;
+    private final HighScoreTable highScoreTable;
 
-    public VictoryPanel()
+    public VictoryPanel(HighScoreTable highScoreTable)
     {
+        this.highScoreTable = highScoreTable;
         setBackground(Color.black);
     }
 
@@ -57,81 +53,25 @@ class VictoryPanel extends JPanel implements KeyListener
 
     public void highScore()
     {
-        try
-        {
-            String[] names = new String[10];
-            int[] scores = new int[10];
+        HighScore score = new HighScore(playerName, Global.PC.score);
+        highScoreTable.recordScore(score);
 
-            File highscores = new File("highscores.txt");
-            if (!highscores.exists())
-            {
-                DataOutputStream out = new DataOutputStream(new FileOutputStream(highscores));
-                for (int i = 0; i < 10; i ++)
-                {
-                    out.writeChars("no one");
-                    out.writeChar('\t');
-                    out.writeInt(0);
-                }
-                out.close();
-            }
-            DataInputStream in = new DataInputStream(new FileInputStream(highscores));
-            for (int i = 0; i < 10; i++)
-            {
-                char chr;
-                StringBuffer sBuffer = new StringBuffer();
+        removeAll();
 
-                while ((chr = in.readChar()) != '\t')
-                {
-                    sBuffer.append(chr);
-                }
-                names[i] = sBuffer.toString();
-                scores[i] = in.readInt();
-            }
-            in.close();
+        victoryScrn = new ImageIcon(getClass().getResource("Victory.gif"));
+        JLabel background = new JLabel(victoryScrn);
 
-            if (Global.PC.score > scores[9])
-            {
-                int i = 8;
-                while (Global.PC.score > scores[i] && i > 0)
-                {
-                    i--;
-                    names[i + 1] = names[i];
-                    scores[i + 1]= scores[i];
-                }
-                names[i] = playerName;
-                scores[i] = Global.PC.score;
-            }
+        Insets insets = this.getInsets();
 
-            DataOutputStream out = new DataOutputStream(new FileOutputStream(highscores));
-            for (int i = 0; i < 10; i++)
-            {
-                out.writeChars(names[i]);
-                out.writeChar('\t');
-                out.writeInt(scores[i]);
-            }
-            out.close();
+        add(background);
+        setLayout(null);
+        background.setBounds(1 + insets.left,1 + insets.top, 639, 479);
+        background.setVisible(true);
 
-            removeAll();
-
-            victoryScrn = new ImageIcon(getClass().getResource("Victory.gif"));
-            JLabel background = new JLabel(victoryScrn);
-
-            Insets insets = this.getInsets();
-
-            add(background);
-            setLayout(null);
-            background.setBounds(1 + insets.left,1 + insets.top, 639, 479);
-            background.setVisible(true);
-
-            addKeyListener(this);
-            requestFocus();
-            doneVictory = true;
-            repaint();
-        }
-        catch(IOException e)
-        {
-            System.err.print("Error: " + e);
-        }
+        addKeyListener(this);
+        requestFocus();
+        doneVictory = true;
+        repaint();
     }
 
     public boolean isFocusable()

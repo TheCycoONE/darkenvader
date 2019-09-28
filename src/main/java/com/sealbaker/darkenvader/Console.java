@@ -9,18 +9,18 @@ import javax.swing.JFrame;
 // Main window
 class Console extends JFrame implements ComponentListener
 {
-    Container cp;
-    SplashPanel splash;
-    CreditPanel credits;
-    GamePanel game;
-    InstructionPanel instruc;
-    StoryPanel story;
-    SetupPanel setup;
-    GameOverPanel gameOver;
-    VictoryPanel victory;
-    HighScorePanel highScore;
+    private final Container cp;
+    private final SplashPanel splash;
+    private final CreditPanel credits;
+    private final GamePanel game;
+    private final InstructionPanel instruc;
+    private final StoryPanel story;
+    private final SetupPanel setup;
+    private final GameOverPanel gameOver;
+    private final VictoryPanel victory;
+    private final HighScorePanel highScore;
 
-    public Console()
+    public Console(HighScoreTable highScoreTable)
     {
         setTitle("Darkenvader");
         setLocation(1,1);
@@ -36,8 +36,8 @@ class Console extends JFrame implements ComponentListener
         story = new StoryPanel();
         setup = new SetupPanel();
         gameOver = new GameOverPanel();
-        victory = new VictoryPanel();
-        highScore = new HighScorePanel();
+        victory = new VictoryPanel(highScoreTable);
+        highScore = new HighScorePanel(highScoreTable);
 
         cp.add(splash);
         splash.setVisible(true);
