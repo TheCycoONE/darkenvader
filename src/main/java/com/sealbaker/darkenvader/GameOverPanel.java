@@ -1,6 +1,5 @@
 package com.sealbaker.darkenvader;
 
-import java.awt.MediaTracker;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,7 +15,6 @@ class GameOverPanel extends JPanel implements KeyListener
     public GameOverPanel()
     {
         this.addKeyListener(this);
-        MediaTracker gameOverTracker = new MediaTracker(this);
 
         try
         {
@@ -43,11 +41,11 @@ class GameOverPanel extends JPanel implements KeyListener
         setVisible(false);
     }
 
-    public void keyPressed(java.awt.event.KeyEvent keyEvent)
+    public void keyPressed(KeyEvent keyEvent)
     {
     }
 
-    public void keyReleased(java.awt.event.KeyEvent keyEvent)
+    public void keyReleased(KeyEvent keyEvent)
     {
     }
 }
