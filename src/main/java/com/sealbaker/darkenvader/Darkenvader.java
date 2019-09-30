@@ -7,8 +7,9 @@ package com.sealbaker.darkenvader;
 import javax.swing.SwingUtilities;
 
 public class Darkenvader {
-	public static void main(String[] args) {
-		HighScoreTable highScoreTable = new HighScoreTable();
+	public static void main(String[] args) throws Exception {
+		FileSystem fs = new FileSystem();
+		HighScoreTable highScoreTable = new HighScoreTable(fs);
 
 		SwingUtilities.invokeLater(() -> {
 			Console c = new Console(highScoreTable);

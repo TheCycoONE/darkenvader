@@ -6,13 +6,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 class HighScoreTable {
 	private static final int MAX_HIGH_SCORES = 10;
+	
+	private FileSystem fileSystem;
 
-	public HighScoreTable() {
+	public HighScoreTable(FileSystem fileSystem) {
+		this.fileSystem = fileSystem;
 	}
 
 	public List<HighScore> getHighScores() {
@@ -77,7 +82,8 @@ class HighScoreTable {
 	}
 
 	private File getHighScoreFile() throws IOException {
-		File highScoreFile = new File("highscores.txt");
+		Path highScorePath = Paths.get(fileSystem.getDataPath().toString(), "highscores.txt");
+		File highScoreFile = highScorePath.toFile();
 		return highScoreFile;
 	}
 
