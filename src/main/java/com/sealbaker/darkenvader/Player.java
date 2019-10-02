@@ -7,7 +7,7 @@ import java.util.EnumMap;
 import javax.imageio.ImageIO;
 
 class Player extends Actor {
-	int score;
+	private int score;
 	private Direction direction = Direction.DOWN;
 
 	private final EnumMap<Direction, BufferedImage> sprites;
@@ -58,4 +58,12 @@ class Player extends Actor {
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addToScore(int change) {
+        score = score + change;
+    }
 }

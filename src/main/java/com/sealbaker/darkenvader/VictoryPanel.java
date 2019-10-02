@@ -51,7 +51,7 @@ class VictoryPanel extends JPanel implements KeyListener {
 	}
 
 	public void highScore() {
-		HighScore score = new HighScore(playerName, player.score);
+		HighScore score = new HighScore(playerName, player.getScore());
 		highScoreTable.recordScore(score);
 
 		removeAll();

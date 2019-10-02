@@ -96,7 +96,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 			this.setVisible(false);
 		} else {
 			statBox.setText("Stats:\nSpirit: " + PC.spirit + "\nAttack: " + PC.attack + "\nDefence: " + PC.defence
-					+ "\nScore: " + PC.score);
+					+ "\nScore: " + PC.getScore());
 
 			mapOnScreen = createImage(new FilteredImageSource(worldMap.getSource(),
 					new CropImageFilter(PC.x - 320, PC.y - 150, 639, 299)));
@@ -186,7 +186,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 				msgBox.setText("There is nothing to read here.");
 			}
 		} else if (keyEvent.getKeyCode() == KeyEvent.VK_V) {
-			if (PC.score >= 100) {
+			if (PC.getScore() >= 100) {
 				this.removeAll();
 				Global.curPanel = Global.VICTORY_PANEL;
 				setVisible(false);
@@ -237,7 +237,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 			battle.setVisible(true);
 			battle.requestFocus();
 			battle.addComponentListener(this);
-			iscore = PC.score;
+			iscore = PC.getScore();
 		}
 
 		runWork();
@@ -253,16 +253,16 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 		this.remove(battle);
 		battle = null;
 		this.requestFocus();
-		if (iscore == 0 && PC.score > 0) {
+		if (iscore == 0 && PC.getScore() > 0) {
 			msgBox.setText(
 					"So, you have brought peace to one of my minons.\nDon't be too proud of yourself Darkenvader.");
-		} else if (iscore < 75 && PC.score >= 75) {
+		} else if (iscore < 75 && PC.getScore() >= 75) {
 			msgBox.setText(
 					"You're arrogant young one.\nDo you not know that all your power comes from me?\nI think it's time for you to be humbled!");
 			PC.defence = 10;
 			PC.attack = 10;
 			PC.spirit = 25;
-		} else if (iscore < 100 && PC.score >= 100) {
+		} else if (iscore < 100 && PC.getScore() >= 100) {
 			msgBox.setText(
 					"Impressive... I admire your spirit, and your request is granted.\nYou may leave my world at any time with your girl.\nI'm sure that in your world your deeds will be renouned,\nand this is your opportunity to augment them.\nAnytime you'd like to leave simply press 'v'.");
 		}

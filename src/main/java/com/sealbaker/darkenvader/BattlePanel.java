@@ -68,7 +68,7 @@ class BattlePanel extends JPanel implements KeyListener {
 
 	public void keyTyped(KeyEvent event) {
 		if (event.getKeyChar() == 'v') {
-			player.score = player.score + monster.score;
+			player.addToScore(monster.score);
 			this.setVisible(false);
 		} else if (event.getKeyChar() == 'd') {
 			player.spirit = 0;
