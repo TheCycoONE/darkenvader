@@ -11,6 +11,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages the High Score file, which is saved in highscore.dat
+ */
 class HighScoreTable {
 	private static final int MAX_HIGH_SCORES = 10;
 	
@@ -30,14 +33,10 @@ class HighScoreTable {
 
 			try (DataInputStream in = new DataInputStream(new FileInputStream(highScoreFile))) {
 				for (int i = 0; i < MAX_HIGH_SCORES; i++) {
-					char chr;
-					StringBuffer sBuffer = new StringBuffer();
-
-					while ((chr = in.readChar()) != '\t') {
-						sBuffer.append(chr);
-					}
-					HighScore score = new HighScore(sBuffer.toString(), in.readInt());
-					highScores.add(score);
+					int score = in.readInt();
+					String name = in.readUTF();
+					HighScore highScore = new HighScore(name, score);
+					highScores.add(highScore);
 				}
 			}
 		} catch (IOException e) {
@@ -72,9 +71,8 @@ class HighScoreTable {
 
 			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(highScoreFile))) {
 				for (HighScore score : highScores) {
-					out.writeChars(score.getName());
-					out.writeChar('\t');
 					out.writeInt(score.getScore());
+					out.writeUTF(score.getName());
 				}
 			}
 		} catch (IOException e) {
@@ -82,7 +80,7 @@ class HighScoreTable {
 	}
 
 	private File getHighScoreFile() throws IOException {
-		Path highScorePath = Paths.get(fileSystem.getDataPath().toString(), "highscores.txt");
+		Path highScorePath = Paths.get(fileSystem.getDataPath().toString(), "highscores.dat");
 		File highScoreFile = highScorePath.toFile();
 		return highScoreFile;
 	}

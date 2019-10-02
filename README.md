@@ -18,4 +18,3 @@ I have tested Darkenvader using versions 8 and 12 of OpenJDK and Oracle's JDK.
 # Known issues
 * Movement is VERY inefficient. At the time I didn't know how to show a portion
   of an image without reloading the whole thing.
-* High score file is UTF-16 with no BOM.
