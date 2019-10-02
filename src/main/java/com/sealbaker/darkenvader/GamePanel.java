@@ -25,7 +25,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
     Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     BufferedImage worldMap;
-    Image mapOnScreen;
     BufferedImage worldMapMask;
 
     Insets insets;
@@ -57,8 +56,11 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (mapOnScreen != null && PC.mapIcon != null) {
-            g.drawImage(mapOnScreen, 1, 1, this);
+        if (PC.mapIcon != null) {
+            g.drawImage(worldMap,
+                    0, 0, 640, 300,
+                    PC.x - 320, PC.y - 150, PC.x + 320, PC.y + 150,
+                    this);
             g.drawImage(PC.getSprite(), 320, 150, this);
         }
     }
@@ -71,19 +73,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
         } else {
             statBox.setText("Stats:\nSpirit: " + PC.spirit + "\nAttack: " + PC.attack + "\nDefence: " + PC.defence
                     + "\nScore: " + PC.getScore());
-
-            mapOnScreen = createImage(new FilteredImageSource(worldMap.getSource(),
-                    new CropImageFilter(PC.x - 320, PC.y - 150, 639, 299)));
-
-            MediaTracker gameRunTracker = new MediaTracker(this);
-
-            gameRunTracker.addImage(mapOnScreen, 0);
-
-            try {
-                gameRunTracker.waitForAll();
-            } catch (InterruptedException ex) {
-                System.out.println("Can not process image");
-            }
             repaint();
         }
     }

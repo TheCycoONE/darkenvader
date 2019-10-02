@@ -16,5 +16,4 @@ I have tested Darkenvader using versions 8 and 12 of OpenJDK and Oracle's JDK.
 2. Run `gradlew.bat run`
 
 # Known issues
-* Movement is VERY inefficient. At the time I didn't know how to show a portion
-  of an image without reloading the whole thing.
+* Battle is not implemented (Just press `v` to win or `d` to lose)
