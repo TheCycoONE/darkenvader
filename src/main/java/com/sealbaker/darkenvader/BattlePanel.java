@@ -13,13 +13,16 @@ import javax.swing.JTextArea;
 class BattlePanel extends JPanel implements KeyListener {
 	Image monsterPic;
 	Monster monster;
+	private Player player;
 
 	JTextArea plrStatBox;
 	JTextArea mtrStatBox;
 
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-	public BattlePanel(int m) {
+	public BattlePanel(Player player, int m) {
+		this.player = player;
+
 		requestFocus();
 		this.setLayout(null);
 		Insets insets = this.getInsets();
@@ -57,18 +60,18 @@ class BattlePanel extends JPanel implements KeyListener {
 		setBackground(Color.black);
 		g.setColor(Color.red);
 		g.drawImage(monsterPic, 1, 1, this);
-		plrStatBox.setText("Stats:\nSpirit: " + Global.PC.spirit + "\nAttack: " + Global.PC.attack + "\nDefence: "
-				+ Global.PC.defence);
+		plrStatBox.setText(
+				"Stats:\nSpirit: " + player.spirit + "\nAttack: " + player.attack + "\nDefence: " + player.defence);
 		mtrStatBox.setText(monster.type + "\nSpirit: " + monster.spirit + "\nAttack: " + monster.attack + "\nDefence: "
 				+ monster.defence);
 	}
 
 	public void keyTyped(KeyEvent event) {
 		if (event.getKeyChar() == 'v') {
-			Global.PC.score = Global.PC.score + monster.score;
+			player.score = player.score + monster.score;
 			this.setVisible(false);
 		} else if (event.getKeyChar() == 'd') {
-			Global.PC.spirit = 0;
+			player.spirit = 0;
 			this.setVisible(false);
 		}
 	}

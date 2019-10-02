@@ -9,8 +9,11 @@ import javax.swing.JPanel;
 
 class SetupPanel extends JPanel implements KeyListener {
 	Font font;
+	private Player player;
 
-	public SetupPanel() {
+	public SetupPanel(Player player) {
+		this.player = player;
+
 		this.addKeyListener(this);
 		font = new Font("Times New Roman", Font.PLAIN, 25);
 		repaint();
@@ -36,15 +39,15 @@ class SetupPanel extends JPanel implements KeyListener {
 	public void keyTyped(KeyEvent event) {
 		if (event.getKeyChar() == '1') {
 			Global.curPanel = Global.GAME_PANEL;
-			Global.PC.reset(1);
+			player.reset(1);
 			setVisible(false);
 		} else if (event.getKeyChar() == '2') {
 			Global.curPanel = Global.GAME_PANEL;
-			Global.PC.reset(2);
+			player.reset(2);
 			setVisible(false);
 		} else if (event.getKeyChar() == '3') {
 			Global.curPanel = Global.GAME_PANEL;
-			Global.PC.reset(3);
+			player.reset(3);
 			setVisible(false);
 		}
 	}

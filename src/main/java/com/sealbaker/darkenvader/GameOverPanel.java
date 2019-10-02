@@ -14,11 +14,7 @@ class GameOverPanel extends JPanel implements KeyListener {
 	public GameOverPanel() {
 		this.addKeyListener(this);
 
-		try {
-			gameOverScrn = new ImageIcon(getClass().getResource("GameOver.gif"));
-		} catch (Exception ex) {
-			System.err.println("Could not load game over Image");
-		}
+		gameOverScrn = new ImageIcon(getClass().getResource("GameOver.gif"));
 
 		JLabel background = new JLabel(gameOverScrn);
 		this.add(background);

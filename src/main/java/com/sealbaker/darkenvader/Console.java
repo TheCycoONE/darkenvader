@@ -3,6 +3,7 @@ package com.sealbaker.darkenvader;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ComponentListener;
+import java.io.IOException;
 import java.awt.event.ComponentEvent;
 import javax.swing.JFrame;
 
@@ -19,7 +20,7 @@ class Console extends JFrame implements ComponentListener {
 	private final VictoryPanel victory;
 	private final HighScorePanel highScore;
 
-	public Console(HighScoreTable highScoreTable) {
+	public Console(Player player, HighScoreTable highScoreTable) throws IOException {
 		setTitle("Darkenvader");
 		setLocation(1, 1);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,13 +29,13 @@ class Console extends JFrame implements ComponentListener {
 		cp.setPreferredSize(new Dimension(640, 480));
 
 		splash = new SplashPanel();
-		game = new GamePanel();
+		game = new GamePanel(player);
 		instruc = new InstructionPanel();
 		credits = new CreditPanel();
 		story = new StoryPanel();
-		setup = new SetupPanel();
+		setup = new SetupPanel(player);
 		gameOver = new GameOverPanel();
-		victory = new VictoryPanel(highScoreTable);
+		victory = new VictoryPanel(player, highScoreTable);
 		highScore = new HighScorePanel(highScoreTable);
 
 		cp.add(splash);

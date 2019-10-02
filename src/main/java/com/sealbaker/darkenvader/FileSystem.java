@@ -7,16 +7,16 @@ import java.nio.file.Paths;
 
 class FileSystem {
 	private Path dataPath;
-	
+
 	public FileSystem() throws IOException {
 		dataPath = Paths.get(getUserDataDir().toString(), "darkenvader");
 		Files.createDirectories(dataPath);
 	}
-	
+
 	public Path getDataPath() {
 		return dataPath;
 	}
-	
+
 	private Path getUserDataDir() {
 		if (System.getProperty("os.name").contains("Windows")) {
 			if (System.getenv("AppData") != null) {

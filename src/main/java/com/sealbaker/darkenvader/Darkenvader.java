@@ -10,12 +10,18 @@ public class Darkenvader {
 	public static void main(String[] args) throws Exception {
 		FileSystem fs = new FileSystem();
 		HighScoreTable highScoreTable = new HighScoreTable(fs);
+		Player player = new Player();
 
 		SwingUtilities.invokeLater(() -> {
-			Console c = new Console(highScoreTable);
-			c.pack();
-			c.setResizable(false);
-			c.setVisible(true);
+			try {
+				Console c = new Console(player, highScoreTable);
+				c.pack();
+				c.setResizable(false);
+				c.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
 		});
 	}
 }

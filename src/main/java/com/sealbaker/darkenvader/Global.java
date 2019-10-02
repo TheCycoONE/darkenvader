@@ -13,6 +13,4 @@ class Global {
 	static final int BATTLE_PANEL = 11;
 	static final int GAMEOVER_PANEL = 12;
 	static final int VICTORY_PANEL = 13;
-
-	static Player PC = new Player();
 }

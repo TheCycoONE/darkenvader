@@ -16,7 +16,7 @@ import java.util.List;
  */
 class HighScoreTable {
 	private static final int MAX_HIGH_SCORES = 10;
-	
+
 	private FileSystem fileSystem;
 
 	public HighScoreTable(FileSystem fileSystem) {

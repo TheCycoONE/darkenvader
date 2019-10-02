@@ -1,7 +1,25 @@
 package com.sealbaker.darkenvader;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.EnumMap;
+
+import javax.imageio.ImageIO;
+
 class Player extends Actor {
 	int score;
+	private Direction direction = Direction.DOWN;
+
+	private final EnumMap<Direction, BufferedImage> sprites;
+
+	public Player() throws IOException {
+		sprites = new EnumMap<>(Direction.class);
+
+		sprites.put(Direction.UP, ImageIO.read(getClass().getResource("PCU0.gif")));
+		sprites.put(Direction.LEFT, ImageIO.read(getClass().getResource("PCL0.gif")));
+		sprites.put(Direction.DOWN, ImageIO.read(getClass().getResource("PCD0.gif")));
+		sprites.put(Direction.RIGHT, ImageIO.read(getClass().getResource("PCR0.gif")));
+	}
 
 	void reset(int dfclty) {
 		x = 700;
@@ -31,5 +49,13 @@ class Player extends Actor {
 			break;
 		}
 		mapPicURL = "PCD0.gif";
+	}
+
+	public BufferedImage getSprite() {
+		return sprites.get(direction);
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
 	}
 }

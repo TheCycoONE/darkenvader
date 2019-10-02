@@ -17,8 +17,10 @@ class VictoryPanel extends JPanel implements KeyListener {
 	private JTextField plrname;
 	private boolean doneVictory;
 	private final HighScoreTable highScoreTable;
+	private final Player player;
 
-	public VictoryPanel(HighScoreTable highScoreTable) {
+	public VictoryPanel(Player player, HighScoreTable highScoreTable) {
+		this.player = player;
 		this.highScoreTable = highScoreTable;
 		setBackground(Color.black);
 	}
@@ -49,7 +51,7 @@ class VictoryPanel extends JPanel implements KeyListener {
 	}
 
 	public void highScore() {
-		HighScore score = new HighScore(playerName, Global.PC.score);
+		HighScore score = new HighScore(playerName, player.score);
 		highScoreTable.recordScore(score);
 
 		removeAll();

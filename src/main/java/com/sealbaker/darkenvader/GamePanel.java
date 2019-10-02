@@ -13,6 +13,8 @@ import java.awt.event.KeyListener;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.PixelGrabber;
+import java.io.IOException;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import java.util.Random;
@@ -29,13 +31,15 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 	Insets insets;
 	int pixels[];
 	int iscore;
-	Player PC = Global.PC;
+	private Player PC;
 
 	JTextArea statBox = null;
 	JTextArea msgBox = null;
 	BattlePanel battle = null;
 
-	public GamePanel() {
+	public GamePanel(Player player) throws IOException {
+		this.PC = player;
+
 		PC.reset(0);
 		addKeyListener(this);
 
@@ -81,7 +85,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 		super.paintComponent(g);
 		if (mapOnScreen != null && PC.mapIcon != null) {
 			g.drawImage(mapOnScreen, 1, 1, this);
-			g.drawImage(PC.mapIcon, 320, 150, this);
+			g.drawImage(PC.getSprite(), 320, 150, this);
 		}
 	}
 
@@ -100,7 +104,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 			MediaTracker gameRunTracker = new MediaTracker(this);
 
 			gameRunTracker.addImage(mapOnScreen, 0);
-			gameRunTracker.addImage(PC.mapIcon, 1);
 
 			try {
 				gameRunTracker.waitForAll();
@@ -145,28 +148,16 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 		int ty = PC.y;
 
 		if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-			if (!PC.mapPicURL.equals("PCR0.gif")) {
-				PC.mapPicURL = "PCR0.gif";
-				PC.mapIcon = toolkit.getImage(getClass().getResource(PC.mapPicURL));
-			}
+			PC.setDirection(Direction.RIGHT);
 			tx = PC.x + PC.speed;
 		} else if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-			if (!PC.mapPicURL.equals("PCL0.gif")) {
-				PC.mapPicURL = "PCL0.gif";
-				PC.mapIcon = toolkit.getImage(getClass().getResource(PC.mapPicURL));
-			}
+			PC.setDirection(Direction.LEFT);
 			tx = PC.x - PC.speed;
 		} else if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
-			if (!PC.mapPicURL.equals("PCD0.gif")) {
-				PC.mapPicURL = "PCD0.gif";
-				PC.mapIcon = toolkit.getImage(getClass().getResource(PC.mapPicURL));
-			}
+			PC.setDirection(Direction.DOWN);
 			ty = PC.y + PC.speed;
 		} else if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
-			if (!PC.mapPicURL.equals("PCU0.gif")) {
-				PC.mapPicURL = "PCU0.gif";
-				PC.mapIcon = toolkit.getImage(getClass().getResource(PC.mapPicURL));
-			}
+			PC.setDirection(Direction.UP);
 			ty = PC.y - PC.speed;
 		}
 
@@ -240,7 +231,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 		Random rand = new Random();
 
 		if (rand.nextInt(10) == 9) {
-			battle = new BattlePanel(rand.nextInt(2) + 1);
+			battle = new BattlePanel(PC, rand.nextInt(2) + 1);
 			this.add(battle);
 			battle.setBounds(1 + insets.left, 1 + insets.top, 639, 479);
 			battle.setVisible(true);
