@@ -10,26 +10,25 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.PixelGrabber;
 import java.io.IOException;
-
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import java.util.Random;
 
-class GamePanel extends JPanel implements KeyListener, ComponentListener {
-	MediaTracker gameStartTracker = new MediaTracker(this);
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
+class GamePanel extends JPanel implements KeyListener, ComponentListener {
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-	Image worldMap;
+	BufferedImage worldMap;
 	Image mapOnScreen;
-	Image worldMapMask;
+	BufferedImage worldMapMask;
 
 	Insets insets;
-	int pixels[];
 	int iscore;
 	private Player PC;
 
@@ -46,35 +45,10 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 		this.setLayout(null);
 		insets = this.getInsets();
 
-		try {
-			worldMap = toolkit.getImage(getClass().getResource("WorldMap.gif"));
-			worldMapMask = toolkit.getImage(getClass().getResource("WorldMask.gif"));
-		} catch (Exception ex) {
-			System.err.println("Could not load world map or it's mask");
-		}
+        worldMap = ImageIO.read(getClass().getResource("WorldMap.gif"));
+        worldMapMask = ImageIO.read(getClass().getResource("WorldMask.gif"));
 
-		gameStartTracker.addImage(worldMap, 0);
-		gameStartTracker.addImage(worldMapMask, 1);
-		try {
-			gameStartTracker.waitForAll();
-		} catch (InterruptedException ex) {
-			System.out.println("Can not process Game Image");
-		}
-
-		// Grabs all of the the pixels from the mask
-		pixels = new int[worldMapMask.getWidth(this) * worldMapMask.getHeight(this)];
-		PixelGrabber pg = new PixelGrabber(worldMapMask, 0, 0, worldMapMask.getWidth(this),
-				worldMapMask.getHeight(this), pixels, 0, worldMapMask.getWidth(this));
-
-		try {
-			pg.grabPixels();
-		} catch (InterruptedException ex) {
-			System.out.println("Internal difficulty");
-		}
-
-		worldMap.flush();
-		worldMapMask.flush();
-		startGame();
+        startGame();
 	}
 
 	public boolean isFocusable() {
@@ -162,7 +136,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 		}
 
 		else if (keyEvent.getKeyCode() == KeyEvent.VK_R) {
-			int pixel = pixels[PC.y * worldMapMask.getWidth(this) + PC.x];
+			int pixel = worldMapMask.getRGB(PC.x, PC.y);
 			int red = (pixel >> 16) & 0xff;
 			int green = (pixel >> 8) & 0xff;
 			int blue = (pixel) & 0xff;
@@ -197,23 +171,24 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 			setVisible(false);
 		}
 
-		int tlPixel = pixels[ty * worldMapMask.getWidth(this) + tx];
+		int tlPixel = worldMapMask.getRGB(tx, ty);
 		int tlRed = (tlPixel >> 16) & 0xff;
 		int tlGreen = (tlPixel >> 8) & 0xff;
 		int tlBlue = (tlPixel) & 0xff;
 
-		int trPixel = pixels[ty * worldMapMask.getWidth(this) + tx + PC.mapIcon.getWidth(this)];
+		int trPixel = worldMapMask.getRGB(tx + PC.mapIcon.getWidth(this), ty);
 		int trRed = (trPixel >> 16) & 0xff;
 		int trGreen = (trPixel >> 8) & 0xff;
 		int trBlue = (trPixel) & 0xff;
 
-		int blPixel = pixels[(ty + PC.mapIcon.getHeight(this)) * worldMapMask.getWidth(this) + tx];
+		int blPixel = worldMapMask.getRGB(tx, ty + PC.mapIcon.getHeight(this));
 		int blRed = (blPixel >> 16) & 0xff;
 		int blGreen = (blPixel >> 8) & 0xff;
 		int blBlue = (blPixel) & 0xff;
 
-		int brPixel = pixels[(ty + PC.mapIcon.getHeight(this)) * worldMapMask.getWidth(this)
-				+ (tx + PC.mapIcon.getWidth(this))];
+		int brPixel = worldMapMask.getRGB(
+                tx + PC.mapIcon.getWidth(this),
+                ty + PC.mapIcon.getHeight(this));
 		int brRed = (brPixel >> 16) & 0xff;
 		int brGreen = (brPixel >> 8) & 0xff;
 		int brBlue = (brPixel) & 0xff;
