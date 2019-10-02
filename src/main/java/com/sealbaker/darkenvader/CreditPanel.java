@@ -12,35 +12,35 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 class CreditPanel extends JPanel implements KeyListener {
-	BufferedImage creditScrn;
-	Toolkit toolkit = Toolkit.getDefaultToolkit();
+    BufferedImage creditScrn;
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-	public CreditPanel() throws IOException {
-		this.addKeyListener(this);
+    public CreditPanel() throws IOException {
+        this.addKeyListener(this);
 
-		creditScrn = ImageIO.read(getClass().getResource("Credits.gif"));
+        creditScrn = ImageIO.read(getClass().getResource("Credits.gif"));
 
-		requestFocus();
-		repaint();
-	}
+        requestFocus();
+        repaint();
+    }
 
-	public boolean isFocusable() {
-		return true;
-	}
+    public boolean isFocusable() {
+        return true;
+    }
 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.drawImage(creditScrn, 1, 1, this);
-	}
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(creditScrn, 1, 1, this);
+    }
 
-	public void keyTyped(KeyEvent event) {
-		Global.curPanel = Global.SPLASH_PANEL;
-		setVisible(false);
-	}
+    public void keyTyped(KeyEvent event) {
+        Global.curPanel = Global.SPLASH_PANEL;
+        setVisible(false);
+    }
 
-	public void keyPressed(KeyEvent keyEvent) {
-	}
+    public void keyPressed(KeyEvent keyEvent) {
+    }
 
-	public void keyReleased(KeyEvent keyEvent) {
-	}
+    public void keyReleased(KeyEvent keyEvent) {
+    }
 }
