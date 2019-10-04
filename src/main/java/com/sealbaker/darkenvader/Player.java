@@ -48,7 +48,6 @@ class Player extends Actor {
             defence = 100;
             break;
         }
-        mapPicURL = "PCD0.gif";
     }
 
     public BufferedImage getSprite() {

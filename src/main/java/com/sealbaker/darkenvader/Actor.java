@@ -13,5 +13,4 @@ class Actor {
     public int xwidth;
     public int ywidth;
     public int speed;
-    public String mapPicURL;
 }

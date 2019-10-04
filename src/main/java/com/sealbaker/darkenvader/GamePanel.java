@@ -2,18 +2,12 @@ package com.sealbaker.darkenvader;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.MediaTracker;
-import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.PixelGrabber;
 import java.io.IOException;
 import java.util.Random;
 
@@ -22,8 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 class GamePanel extends JPanel implements KeyListener, ComponentListener {
-    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
-
     private final BufferedImage worldMap;
     private final BufferedImage worldMapMask;
     private final Insets insets;
@@ -96,8 +88,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 
         statBox.setVisible(true);
         msgBox.setVisible(true);
-
-        PC.mapIcon = toolkit.getImage(getClass().getResource(PC.mapPicURL));
 
         msgBox.setText(
                 "Welcome, here you have no name, you will be called only Darkenvader.\nBecause you have invaded my domain, but rest assured Darkenvader,\nwithout the light you will fail, and you will accept this.");
