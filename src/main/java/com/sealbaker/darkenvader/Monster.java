@@ -1,8 +1,8 @@
 package com.sealbaker.darkenvader;
 
 class Monster extends Actor {
-    String picFile;
-    String type;
+    public String picFile;
+    public String type;
 
     public Monster(int m) {
         switch (m) {

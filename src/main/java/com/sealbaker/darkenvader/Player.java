@@ -21,7 +21,7 @@ class Player extends Actor {
         sprites.put(Direction.RIGHT, ImageIO.read(getClass().getResource("PCR0.gif")));
     }
 
-    void reset(int dfclty) {
+    public void reset(int dfclty) {
         x = 700;
         y = 700;
         speed = 4;

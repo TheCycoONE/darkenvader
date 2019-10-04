@@ -9,20 +9,15 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 class SplashPanel extends JPanel implements KeyListener {
-    Image splashScrn;
-
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    private final Image splashScrn;
+    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     public SplashPanel() {
         this.addKeyListener(this);
         MediaTracker splashTracker = new MediaTracker(this);
 
-        try {
-            splashScrn = toolkit.getImage(getClass().getResource("Splash.gif"));
-            splashTracker.addImage(splashScrn, 0);
-        } catch (Exception ex) {
-            System.err.println("Problem Loading Image");
-        }
+        splashScrn = toolkit.getImage(getClass().getResource("Splash.gif"));
+        splashTracker.addImage(splashScrn, 0);
 
         try {
             splashTracker.waitForAll();

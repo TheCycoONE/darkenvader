@@ -22,18 +22,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 class GamePanel extends JPanel implements KeyListener, ComponentListener {
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-    BufferedImage worldMap;
-    BufferedImage worldMapMask;
-
-    Insets insets;
-    int iscore;
-    private Player PC;
-
-    JTextArea statBox = null;
-    JTextArea msgBox = null;
-    BattlePanel battle = null;
+    private final BufferedImage worldMap;
+    private final BufferedImage worldMapMask;
+    private final Insets insets;
+    private final Player PC;
+    
+    private int iscore;
+    private JTextArea statBox = null;
+    private JTextArea msgBox = null;
+    private BattlePanel battle = null;
 
     public GamePanel(Player player) throws IOException {
         this.PC = player;
@@ -106,7 +105,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
     }
 
     public void keyPressed(java.awt.event.KeyEvent keyEvent) {
-
         int tx = PC.x;
         int ty = PC.y;
 

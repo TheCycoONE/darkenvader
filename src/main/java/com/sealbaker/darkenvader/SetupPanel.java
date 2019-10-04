@@ -8,8 +8,8 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 class SetupPanel extends JPanel implements KeyListener {
-    Font font;
-    private Player player;
+    private final Font font;
+    private final Player player;
 
     public SetupPanel(Player player) {
         this.player = player;

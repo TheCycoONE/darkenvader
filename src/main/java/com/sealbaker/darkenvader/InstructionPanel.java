@@ -9,16 +9,11 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 class InstructionPanel extends JPanel implements KeyListener {
-    Image instrucScrn;
-
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    private final Image instrucScrn;
+    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     public InstructionPanel() {
-        try {
-            instrucScrn = toolkit.getImage(getClass().getResource("Instructions.gif"));
-        } catch (Exception ex) {
-            System.err.println("Could not load Instructions Image");
-        }
+        instrucScrn = toolkit.getImage(getClass().getResource("Instructions.gif"));
 
         MediaTracker instrucTracker = new MediaTracker(this);
         instrucTracker.addImage(instrucScrn, 0);

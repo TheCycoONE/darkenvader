@@ -11,14 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 class BattlePanel extends JPanel implements KeyListener {
-    Image monsterPic;
-    Monster monster;
-    private Player player;
+    private final Image monsterPic;
+    private final Monster monster;
+    private final Player player;
+    private final JTextArea plrStatBox;
+    private final JTextArea mtrStatBox;
 
-    JTextArea plrStatBox;
-    JTextArea mtrStatBox;
-
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    private Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     public BattlePanel(Player player, int m) {
         this.player = player;

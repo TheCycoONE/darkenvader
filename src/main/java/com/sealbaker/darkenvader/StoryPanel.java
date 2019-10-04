@@ -9,17 +9,13 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 class StoryPanel extends JPanel implements KeyListener {
-    Image storyScrn;
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    private final Image storyScrn;
+    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     public StoryPanel() {
         this.addKeyListener(this);
 
-        try {
-            storyScrn = toolkit.getImage(getClass().getResource("Story.gif"));
-        } catch (Exception ex) {
-            System.err.println("Can not load story screen!");
-        }
+        storyScrn = toolkit.getImage(getClass().getResource("Story.gif"));
 
         MediaTracker storyTracker = new MediaTracker(this);
         storyTracker.addImage(storyScrn, 0);

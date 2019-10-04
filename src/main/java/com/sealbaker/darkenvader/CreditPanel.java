@@ -12,8 +12,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 class CreditPanel extends JPanel implements KeyListener {
-    BufferedImage creditScrn;
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    private final BufferedImage creditScrn;
+    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     public CreditPanel() throws IOException {
         this.addKeyListener(this);

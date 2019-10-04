@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 class FileSystem {
-    private Path dataPath;
+    private final Path dataPath;
 
     public FileSystem() throws IOException {
         dataPath = Paths.get(getUserDataDir().toString(), "darkenvader");

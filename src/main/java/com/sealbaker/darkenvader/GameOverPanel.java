@@ -8,8 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 class GameOverPanel extends JPanel implements KeyListener {
-    ImageIcon gameOverScrn;
-    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    private final ImageIcon gameOverScrn;
+    private final Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     public GameOverPanel() {
         this.addKeyListener(this);
