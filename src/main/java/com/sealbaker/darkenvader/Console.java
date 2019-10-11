@@ -20,7 +20,10 @@ class Console extends JFrame implements ComponentListener {
     private final VictoryPanel victory;
     private final HighScorePanel highScore;
 
-    public Console(Player player, HighScoreTable highScoreTable) throws IOException {
+    public Console(
+            WorldMap worldMap,
+            Player player,
+            HighScoreTable highScoreTable) throws IOException {
         setTitle("Darkenvader");
         setLocation(1, 1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +32,7 @@ class Console extends JFrame implements ComponentListener {
         cp.setPreferredSize(new Dimension(640, 480));
 
         splash = new SplashPanel();
-        game = new GamePanel(player);
+        game = new GamePanel(worldMap, player);
         instruc = new InstructionPanel();
         credits = new CreditPanel();
         story = new StoryPanel();

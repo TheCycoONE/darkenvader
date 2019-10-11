@@ -8,16 +8,13 @@ import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 class GamePanel extends JPanel implements KeyListener, ComponentListener {
-    private final BufferedImage worldMap;
-    private final BufferedImage worldMapMask;
+    private final WorldMap worldMap;
     private final Insets insets;
     private final Player PC;
     
@@ -26,7 +23,8 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
     private JTextArea msgBox = null;
     private BattlePanel battle = null;
 
-    public GamePanel(Player player) throws IOException {
+    public GamePanel(WorldMap worldMap, Player player) {
+        this.worldMap = worldMap;
         this.PC = player;
 
         PC.reset(0);
@@ -34,9 +32,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 
         this.setLayout(null);
         insets = this.getInsets();
-
-        worldMap = ImageIO.read(getClass().getResource("WorldMap.gif"));
-        worldMapMask = ImageIO.read(getClass().getResource("WorldMask.gif"));
 
         startGame();
     }
@@ -47,13 +42,11 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (PC.mapIcon != null) {
-            g.drawImage(worldMap,
-                    0, 0, 640, 300,
-                    PC.x - 320, PC.y - 150, PC.x + 320, PC.y + 150,
-                    this);
-            g.drawImage(PC.getSprite(), 320, 150, this);
-        }
+        g.drawImage(worldMap.getWorldMapImage(),
+                0, 0, 640, 300,
+                PC.x - 320, PC.y - 150, PC.x + 320, PC.y + 150,
+                this);
+        g.drawImage(PC.getSprite(), 320, 150, this);
     }
 
     private void runWork() {
@@ -97,6 +90,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
     public void keyPressed(java.awt.event.KeyEvent keyEvent) {
         int tx = PC.x;
         int ty = PC.y;
+        BufferedImage worldMapMask = worldMap.getWorldMapMask();
 
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             PC.setDirection(Direction.RIGHT);
@@ -153,19 +147,19 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
         int tlGreen = (tlPixel >> 8) & 0xff;
         int tlBlue = (tlPixel) & 0xff;
 
-        int trPixel = worldMapMask.getRGB(tx + PC.mapIcon.getWidth(this), ty);
+        int trPixel = worldMapMask.getRGB(tx + PC.getWidth(), ty);
         int trRed = (trPixel >> 16) & 0xff;
         int trGreen = (trPixel >> 8) & 0xff;
         int trBlue = (trPixel) & 0xff;
 
-        int blPixel = worldMapMask.getRGB(tx, ty + PC.mapIcon.getHeight(this));
+        int blPixel = worldMapMask.getRGB(tx, ty + PC.getHeight());
         int blRed = (blPixel >> 16) & 0xff;
         int blGreen = (blPixel >> 8) & 0xff;
         int blBlue = (blPixel) & 0xff;
 
         int brPixel = worldMapMask.getRGB(
-                tx + PC.mapIcon.getWidth(this),
-                ty + PC.mapIcon.getHeight(this));
+                tx + PC.getWidth(),
+                ty + PC.getHeight());
         int brRed = (brPixel >> 16) & 0xff;
         int brGreen = (brPixel >> 8) & 0xff;
         int brBlue = (brPixel) & 0xff;

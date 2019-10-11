@@ -65,4 +65,12 @@ class Player extends Actor {
     public void addToScore(int change) {
         score = score + change;
     }
+
+    public int getWidth() {
+        return sprites.get(direction).getWidth();
+    }
+
+    public int getHeight() {
+        return sprites.get(direction).getHeight();
+    }
 }
