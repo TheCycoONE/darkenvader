@@ -90,7 +90,6 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
     public void keyPressed(java.awt.event.KeyEvent keyEvent) {
         int tx = PC.x;
         int ty = PC.y;
-        BufferedImage worldMapMask = worldMap.getWorldMapMask();
 
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             PC.setDirection(Direction.RIGHT);
@@ -107,29 +106,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
         }
 
         else if (keyEvent.getKeyCode() == KeyEvent.VK_R) {
-            int pixel = worldMapMask.getRGB(PC.x, PC.y);
-            int red = (pixel >> 16) & 0xff;
-            int green = (pixel >> 8) & 0xff;
-            int blue = (pixel) & 0xff;
-
-            if (red == 0) {
-                switch (green) {
-                case 32:
-                    msgBox.setText("Fly! Fly! The atmosphere is thin, and freedom is a relative term.");
-                    break;
-                case 64:
-                    msgBox.setText("Welcome to Hell!");
-                    break;
-                case 96:
-                    msgBox.setText("Hither the lake of lost dreams.");
-                    break;
-                default:
-                    msgBox.setText("It's too hard to make out." + green);
-                    break;
-                }
-            } else {
-                msgBox.setText("There is nothing to read here.");
-            }
+            msgBox.setText(worldMap.readMessageAt(PC.x, PC.y));
         } else if (keyEvent.getKeyCode() == KeyEvent.VK_V) {
             if (PC.getScore() >= 100) {
                 this.removeAll();
@@ -142,6 +119,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
             setVisible(false);
         }
 
+        BufferedImage worldMapMask = worldMap.getWorldMapMask();
         int tlPixel = worldMapMask.getRGB(tx, ty);
         int tlRed = (tlPixel >> 16) & 0xff;
         int tlGreen = (tlPixel >> 8) & 0xff;
