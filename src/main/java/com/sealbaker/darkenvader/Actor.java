@@ -2,7 +2,7 @@ package com.sealbaker.darkenvader;
 
 import java.awt.Image;
 
-class Actor {
+public class Actor {
     public int x;
     public int y;
     public int spirit;

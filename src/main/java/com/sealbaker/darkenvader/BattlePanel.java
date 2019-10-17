@@ -7,8 +7,11 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import com.sealbaker.darkenvader.monsters.Monster;
 
 class BattlePanel extends JPanel implements KeyListener {
     private final Image monsterPic;
@@ -19,14 +22,13 @@ class BattlePanel extends JPanel implements KeyListener {
 
     private Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-    public BattlePanel(Player player, int m) {
+    public BattlePanel(Player player, Monster monster) {
         this.player = player;
+        this.monster = monster;
 
         requestFocus();
         this.setLayout(null);
-        Insets insets = this.getInsets();
 
-        monster = new Monster(m);
         monsterPic = toolkit.getImage(getClass().getResource(monster.picFile));
 
         plrStatBox = new JTextArea();
@@ -34,6 +36,7 @@ class BattlePanel extends JPanel implements KeyListener {
         this.add(plrStatBox);
         this.add(mtrStatBox);
 
+        Insets insets = this.getInsets();
         plrStatBox.setBounds(320 + insets.left, 300 + insets.top, 319, 180);
         plrStatBox.setBackground(new Color((float) 0.2, (float) 0.0, (float) 0.0));
         plrStatBox.setForeground(new Color((float) 1.0, (float) 0.0, (float) 0.0));

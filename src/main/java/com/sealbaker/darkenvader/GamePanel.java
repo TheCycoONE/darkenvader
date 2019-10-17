@@ -13,6 +13,9 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.sealbaker.darkenvader.monsters.Monster;
+import com.sealbaker.darkenvader.monsters.MonsterFactory;
+
 class GamePanel extends JPanel implements KeyListener, ComponentListener {
     private final WorldMap worldMap;
     private final Insets insets;
@@ -155,7 +158,8 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
         Random rand = new Random();
 
         if (rand.nextInt(10) == 9) {
-            battle = new BattlePanel(PC, rand.nextInt(2) + 1);
+            Monster monster = MonsterFactory.create(rand.nextInt(2) + 1);
+            battle = new BattlePanel(PC, monster);
             this.add(battle);
             battle.setBounds(1 + insets.left, 1 + insets.top, 639, 479);
             battle.setVisible(true);
