@@ -9,6 +9,9 @@ class WorldMap {
     private final BufferedImage worldMap;
     private final BufferedImage worldMapMask;
 
+    private final int WALL = 0xff000000;
+    private final int POISON = 0xffff00ff;
+
     public WorldMap() throws IOException {
         worldMap = ImageIO.read(getClass().getResource("WorldMap.gif"));
         worldMapMask = ImageIO.read(getClass().getResource("WorldMask.gif"));
@@ -18,24 +21,43 @@ class WorldMap {
         return worldMap;
     }
 
-    // TODO: Move behaviour into this class so that the mask doesn't leak
-    public BufferedImage getWorldMapMask() {
-        return worldMapMask;
+    private int maskAt(int x, int y) {
+        return worldMapMask.getRGB(x, y);
+    }
+
+    public boolean isRectTouchingWall(int x, int y, int w, int h) {
+        return isRectTouching(x, y, w, h, WALL);
+    }
+
+    public boolean isRectTouchingPoison(int x, int y, int w, int h) {
+        return isRectTouching(x, y, w, h, POISON);
+    }
+
+    private boolean isRectTouching(int x, int y, int w, int h, int target) {
+        for (int tx = x; tx < x + w; tx++) {
+            if (maskAt(tx, y) == target) { return true; }
+            if (maskAt(tx, y + h - 1) == target) { return true; }
+        }
+        for (int ty = y; ty < y + h; ty++) {
+            if (maskAt(x, ty) == target) { return true; }
+            if (maskAt(x + w - 1, ty) == target) { return true; }
+        }
+        return false;
     }
 
     public String readMessageAt(int x, int y) {
-        int mask = worldMapMask.getRGB(x, y);
+        int mask = maskAt(x, y);
 
-        if ((mask & 0xff0000) != 0) {
+        if ((mask & 0x00ff0000) != 0) {
             return "There is nothing to read here.";
         }
 
-        switch (mask & 0x00ff00) {
-        case 0x002000:
+        switch (mask & 0x0000ff00) {
+        case 0x00002000:
             return "Fly! Fly! The atmosphere is thin, and freedom is a relative term.";
-        case 0x004000:
+        case 0x00004000:
             return "Welcome to Hell!";
-        case 0x006000:
+        case 0x00006000:
             return "Hither the lake of lost dreams.";
         default:
             return "It's too hard to make out." + mask;

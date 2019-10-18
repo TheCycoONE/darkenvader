@@ -20,7 +20,7 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
     private final WorldMap worldMap;
     private final Insets insets;
     private final Player PC;
-    
+
     private int iscore;
     private JTextArea statBox = null;
     private JTextArea msgBox = null;
@@ -122,41 +122,16 @@ class GamePanel extends JPanel implements KeyListener, ComponentListener {
             setVisible(false);
         }
 
-        BufferedImage worldMapMask = worldMap.getWorldMapMask();
-        int tlPixel = worldMapMask.getRGB(tx, ty);
-        int tlRed = (tlPixel >> 16) & 0xff;
-        int tlGreen = (tlPixel >> 8) & 0xff;
-        int tlBlue = (tlPixel) & 0xff;
-
-        int trPixel = worldMapMask.getRGB(tx + PC.getWidth(), ty);
-        int trRed = (trPixel >> 16) & 0xff;
-        int trGreen = (trPixel >> 8) & 0xff;
-        int trBlue = (trPixel) & 0xff;
-
-        int blPixel = worldMapMask.getRGB(tx, ty + PC.getHeight());
-        int blRed = (blPixel >> 16) & 0xff;
-        int blGreen = (blPixel >> 8) & 0xff;
-        int blBlue = (blPixel) & 0xff;
-
-        int brPixel = worldMapMask.getRGB(
-                tx + PC.getWidth(),
-                ty + PC.getHeight());
-        int brRed = (brPixel >> 16) & 0xff;
-        int brGreen = (brPixel >> 8) & 0xff;
-        int brBlue = (brPixel) & 0xff;
-
-        if (!(tlRed == 0 && tlBlue == 0 && tlGreen == 0) && !(trRed == 0 && trBlue == 0 && trGreen == 0)
-                && !(blRed == 0 && blBlue == 0 && blGreen == 0) && !(brRed == 0 && brBlue == 0 && brGreen == 0)) {
+        if (!worldMap.isRectTouchingWall(tx, ty, PC.getWidth(), PC.getHeight())) {
             PC.x = tx;
             PC.y = ty;
         }
-        if ((tlRed == 255 && tlBlue == 255 && tlGreen == 0) || (trRed == 255 && trBlue == 255 && trGreen == 0)
-                || (blRed == 255 && blBlue == 255 && blGreen == 0) || (brRed == 255 && brBlue == 255 && brGreen == 0)) {
+
+        if (worldMap.isRectTouchingPoison(tx, ty, PC.getWidth(), PC.getHeight())) {
             PC.spirit = PC.spirit - 1;
         }
 
         Random rand = new Random();
-
         if (rand.nextInt(10) == 9) {
             Monster monster = MonsterFactory.create(rand.nextInt(2) + 1);
             battle = new BattlePanel(PC, monster);
